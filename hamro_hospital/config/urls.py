@@ -29,6 +29,7 @@ urlpatterns = [
     path('operation-theatre/', include('operation_theatre.urls')),
     path('blood-bank/', include('blood_bank.urls')),
     path('finance/', include('finance.urls')),
+    path('referrals/', include('referrals.urls')),
     path('medical-records/', include('medical_records.urls')),
 ]
 

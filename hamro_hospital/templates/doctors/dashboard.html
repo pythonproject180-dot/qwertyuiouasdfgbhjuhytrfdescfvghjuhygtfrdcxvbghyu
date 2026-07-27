@@ -5,6 +5,7 @@
 <nav class="nav flex-column">
     <a class="nav-link active" href="{% url 'doctors:dashboard' %}"><i class="bi bi-speedometer2"></i> Dashboard</a>
     <a class="nav-link" href="{% url 'consultations:queue' %}"><i class="bi bi-clock-history"></i> Consultation Queue</a>
+    <a class="nav-link" href="{% url 'referrals:referral_create' %}"><i class="bi bi-send"></i> Send Referral</a>
     <a class="nav-link" href="{% url 'blood_bank:doctor_patient_lookup' %}"><i class="bi bi-droplet"></i> Request Blood Bank</a>
 </nav>
 {% endblock %}

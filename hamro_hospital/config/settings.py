@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'operation_theatre',
     'blood_bank',
     'finance',
+    'referrals',
     'medical_records',
 ]
 
@@ -250,6 +251,7 @@ JAZZMIN_SETTINGS = {
         'radiology', 'admissions', 'operation_theatre', 'billing', 'insurance',
         'pharmacy', 'blood_bank', 'nursing', 'documents', 'medical_records',
         'departments', 'doctors', 'website', 'reports', 'finance', 'patient_portal',
+    'referrals',
     ],
 
     # Icons: FontAwesome 5 free classes (bundled with Jazzmin), matched to
