@@ -177,3 +177,20 @@ class Announcement(models.Model):
             self.Category.HOLIDAY: 'bi bi-calendar-heart',
             self.Category.SERVICE: 'bi bi-stars',
         }.get(self.category, 'bi bi-bell')
+
+class HomeNotification(models.Model):
+    """
+    Second notification system specifically for the scrolling banner
+    at the top of the homepage.
+    """
+    message = models.TextField(help_text="Nepali text to scroll (e.g. 'हाम्रो अस्पतालमा तपाईंलाई हार्दिक स्वागत छ।')")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'website_home_notification'
+        ordering = ['-updated_at']
+
+    def __str__(self):
+        return self.message[:50]

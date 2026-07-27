@@ -10,7 +10,7 @@ def hospital_settings(request):
     from accounts.models import HospitalSetting
     setting = HospitalSetting.get_solo()
 
-    from website.models import Announcement
+    from website.models import Announcement, HomeNotification
     from django.db.models import Q
     from django.utils import timezone
     now = timezone.now()
@@ -22,7 +22,11 @@ def hospital_settings(request):
     public_announcements_count = public_announcements_qs.count()
     public_announcements = public_announcements_qs[:8]
 
+
+    home_notification = HomeNotification.objects.filter(is_active=True).first()
+
     user_dashboard_url = ''
+
     unread_notifications = []
     unread_count = 0
     if getattr(request, 'user', None) and request.user.is_authenticated:
@@ -53,7 +57,10 @@ def hospital_settings(request):
         'user_dashboard_url': user_dashboard_url,
         'unread_notifications': unread_notifications,
         'unread_count': unread_count,
+
         'public_announcements': public_announcements,
         'public_announcements_count': public_announcements_count,
+        'home_notification': home_notification,
+
         'HOSPITAL_SETTING_OBJ': setting,
     }

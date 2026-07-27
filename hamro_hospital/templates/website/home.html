@@ -2,41 +2,34 @@
 {% block title %}{{ HOSPITAL_NAME }} - Quality Healthcare in Nepal{% endblock %}
 {% block back_button %}{% endblock %}
 {% block content %}
+{% if home_notification %}
+<div style="background-color: var(--accent); color: white; padding: 10px 0; overflow: hidden; white-space: nowrap; font-size: 1.1rem; font-weight: 600;">
+    <div style="display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite;">
+        {{ home_notification.message }}
+    </div>
+</div>
+<style>
+@keyframes marquee {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+</style>
+{% endif %}
+
 
 <section class="tuh-hero text-center">
     <div class="container">
         <h1 class="display-4 fw-bold mb-3">हाम्रो अस्पताल — स्वास्थ्य नै सबैभन्दा ठूलो धन हो।</h1>
-        <p class="lead mb-4">{{ HOSPITAL_NAME }} brings together expert doctors and modern facilities for the people of Nepal.</p>
+        <p class="lead mb-4">हाम्रो अस्पतालले दक्ष चिकित्सक र अत्याधुनिक प्रविधि मार्फत नेपालका नागरिकहरूलाई उत्कृष्ट, भरपर्दो र सुलभ स्वास्थ्य सेवा प्रदान गर्दै आइरहेको छ।</p>
         <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <a href="tel:{{ HOSPITAL_EMERGENCY_PHONE }}" class="btn btn-danger btn-lg text-white">
-                <i class="bi bi-telephone-fill"></i> Emergency: {{ HOSPITAL_EMERGENCY_PHONE }}
+            <a href="{% url 'patient_portal:login' %}" class="btn btn-danger btn-lg text-white">
+                <i class="bi bi-person-circle"></i> Patient Login
             </a>
         </div>
     </div>
 </section>
 
-<section class="container py-5">
-    <div class="tuh-card p-4 p-md-5">
-        <div class="row align-items-center g-4">
-            <div class="col-md-8">
-                <h3 class="fw-bold mb-2"><i class="bi bi-person-circle text-primary"></i> Already a patient here?</h3>
-                <p class="text-muted mb-0">
-                    Log in to your Patient Portal account to see all your visits, prescriptions, lab and
-                    radiology reports, bills, and admissions in one place - and book a new visit or
-                    follow-up yourself, with an instant OPD ticket and QR code.
-                </p>
-            </div>
-            <div class="col-md-4 text-md-end text-center">
-                {% if portal_patient %}
-                    <a href="{% url 'patient_portal:dashboard' %}" class="btn btn-primary btn-lg"><i class="bi bi-speedometer2"></i> Go to My Account</a>
-                {% else %}
-                    <a href="{% url 'patient_portal:login' %}" class="btn btn-primary btn-lg mb-2 mb-md-0 me-md-2">Patient Login</a>
-                    <a href="{% url 'patient_portal:signup' %}" class="btn btn-outline-primary btn-lg">Sign Up</a>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <section class="container" style="margin-top: -30px; position: relative; z-index: 10;">
     <div class="row text-center g-3 justify-content-center">
@@ -83,8 +76,8 @@
     </div>
 </section>
 
-<section class="container py-5">
-    <h2 class="text-center mb-4 fw-bold">Our Departments</h2>
+<section id="ehs" class="container py-5">
+    <h2 class="text-center mb-4 fw-bold">External Hospital Services (EHS)</h2>
     <div class="row g-4">
         {% for dept in departments %}
         <div class="col-md-3 col-sm-6">

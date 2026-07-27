@@ -1,7 +1,7 @@
 from django.contrib import admin
 from website.models import (
     HospitalService, Testimonial, GalleryImage, DiseaseInfo, ContactMessage,
-    MedicalService, Announcement,
+    MedicalService, Announcement, HomeNotification,
 )
 
 
@@ -56,3 +56,7 @@ class AnnouncementAdmin(admin.ModelAdmin):
     list_filter = ('category', 'is_active')
     search_fields = ('title', 'message')
     date_hierarchy = 'publish_at'
+@admin.register(HomeNotification)
+class HomeNotificationAdmin(admin.ModelAdmin):
+    list_display = ('message', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
