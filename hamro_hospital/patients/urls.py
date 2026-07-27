@@ -16,7 +16,7 @@ urlpatterns = [
     path('visit/<int:visit_id>/ticket/', views.opd_ticket, name='opd_ticket'),
     path('visit/<int:visit_id>/ticket/reprint/', views.opd_ticket_reprint, name='opd_ticket_reprint'),
     path('ajax/department/<int:department_id>/doctors/', views.get_doctors_for_department, name='ajax_doctors'),
-    path('api/qr-lookup/', views.qr_lookup, name='qr_lookup'),
+    path('api/lookup/', views.qr_lookup, name='qr_lookup'),
     path('appointment/<int:appointment_id>/confirm/', views.confirm_arrival, name='confirm_arrival'),
     path('appointment/<int:appointment_id>/cancel/', views.cancel_booking, name='cancel_booking'),
 ]

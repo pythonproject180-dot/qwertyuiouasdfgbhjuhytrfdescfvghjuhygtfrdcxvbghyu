@@ -132,8 +132,8 @@ class Patient(models.Model):
     patient_code = models.CharField(max_length=30, unique=True, editable=False, db_index=True)
 
     # Required
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, blank=False, null=False)
+    last_name = models.CharField(max_length=100, blank=False, null=False)
     gender = models.CharField(max_length=1, choices=Gender.choices)
     date_of_birth = models.DateField()
     age_at_registration = models.CharField(
@@ -141,7 +141,7 @@ class Patient(models.Model):
         help_text="How the age was entered at registration, e.g. '24 Years', '11 Years 2 Months', '15 Days'. "
                    "Date of Birth above is auto-calculated from this and can be corrected manually.",
     )
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20, blank=False, null=False)
     district = models.ForeignKey(District, on_delete=models.PROTECT, related_name='patients')
 
     # Optional address detail (Nepal has 753 local levels - kept free-text by design)

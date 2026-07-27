@@ -19,6 +19,20 @@
                 <label class="form-label">Visit Type *</label>
                 {{ form.patient_type }}
             </div>
+            <div class="col-md-4">
+                <label class="form-label">Payment Method *</label>
+                <select name="payment_method" class="form-select" id="id_payment_method" required>
+                    <option value="cash" selected>Cash (Payment Pending)</option>
+                    <option value="esewa">eSewa (Online Payment)</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Use Insurance?</label>
+                <select name="use_insurance" class="form-select">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes (Will verify at counter)</option>
+                </select>
+            </div>
             <div class="col-12">
                 <label class="form-label">Chief Complaint</label>
                 {{ form.chief_complaint }}

@@ -10,6 +10,18 @@
 </div>
 {% endif %}
 
+
+<div class="row g-3 mb-4">
+    <div class="col-6 col-md-3"><a href="{% url 'patient_portal:my_visits' %}" class="btn btn-outline-primary w-100 py-3"><i class="bi bi-clipboard2-pulse d-block fs-3 mb-2"></i>OPD Visits</a></div>
+    <div class="col-6 col-md-3"><a href="{% url 'patient_portal:my_prescriptions' %}" class="btn btn-outline-primary w-100 py-3"><i class="bi bi-capsule d-block fs-3 mb-2"></i>Prescriptions</a></div>
+    <div class="col-6 col-md-3"><a href="{% url 'patient_portal:my_lab_reports' %}" class="btn btn-outline-primary w-100 py-3"><i class="bi bi-flask d-block fs-3 mb-2"></i>Lab Reports</a></div>
+    <div class="col-6 col-md-3"><a href="{% url 'patient_portal:my_radiology_reports' %}" class="btn btn-outline-primary w-100 py-3"><i class="bi bi-file-earmark-medical d-block fs-3 mb-2"></i>Radiology</a></div>
+    <div class="col-6 col-md-3"><a href="{% url 'patient_portal:my_bills' %}" class="btn btn-outline-primary w-100 py-3"><i class="bi bi-receipt d-block fs-3 mb-2"></i>Bills</a></div>
+    <div class="col-6 col-md-3"><a href="{% url 'patient_portal:my_admissions' %}" class="btn btn-outline-primary w-100 py-3"><i class="bi bi-hospital d-block fs-3 mb-2"></i>Admissions</a></div>
+    <div class="col-6 col-md-3"><a href="{% url 'patient_portal:my_documents' %}" class="btn btn-outline-primary w-100 py-3"><i class="bi bi-folder2-open d-block fs-3 mb-2"></i>Medical Records</a></div>
+    <div class="col-6 col-md-3"><a href="{% url 'patient_portal:book_visit' %}" class="btn btn-primary w-100 py-3"><i class="bi bi-calendar-plus d-block fs-3 mb-2 text-white"></i>Book Appointment</a></div>
+</div>
+
 <div class="row g-4 mb-4">
     <div class="col-md-4">
         <div class="stat-card blue"><i class="bi bi-clipboard2-pulse fs-3"></i><h2 class="fw-bold mt-2 mb-0">{{ visit_count }}</h2><small>Total Visits</small></div>

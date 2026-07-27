@@ -3,7 +3,8 @@ import datetime
 from django.db.models import Sum, Count
 from django.shortcuts import render
 
-from accounts.decorators import super_admin_required
+from accounts.decorators import super_admin_required, role_required
+from accounts.models import Role
 from billing.models import Bill, PaymentMethod
 from pharmacy.models import PharmacySale
 from patients.models import Visit, Patient

@@ -170,16 +170,28 @@ def qr_lookup(request):
 
     code = request.GET.get('code', '').strip()
     if not code:
-        return JsonResponse({'found': False, 'error': 'No code supplied.'}, status=400)
+        return JsonResponse({
+        'first_name': patient.first_name,
+        'last_name': patient.last_name,
+        'phone_number': patient.phone_number,
+        'gender': patient.gender,'found': False, 'error': 'No code supplied.'}, status=400)
 
     patient = Patient.objects.filter(
         Q(patient_code__iexact=code) | Q(phone_number=code)
     ).first()
 
     if not patient:
-        return JsonResponse({'found': False, 'error': 'No patient matches that code.'})
+        return JsonResponse({
+        'first_name': patient.first_name,
+        'last_name': patient.last_name,
+        'phone_number': patient.phone_number,
+        'gender': patient.gender,'found': False, 'error': 'No patient matches that code.'})
 
     return JsonResponse({
+        'first_name': patient.first_name,
+        'last_name': patient.last_name,
+        'phone_number': patient.phone_number,
+        'gender': patient.gender,
         'found': True,
         'id': patient.pk,
         'patient_code': patient.patient_code,
@@ -536,7 +548,11 @@ def get_doctors_for_department(request, department_id):
             'remaining_quota': remaining,
             'on_leave': doc.is_on_leave(today),
         })
-    return JsonResponse({'doctors': results})
+    return JsonResponse({
+        'first_name': patient.first_name,
+        'last_name': patient.last_name,
+        'phone_number': patient.phone_number,
+        'gender': patient.gender,'doctors': results})
 
 
 @registration_counter_required
