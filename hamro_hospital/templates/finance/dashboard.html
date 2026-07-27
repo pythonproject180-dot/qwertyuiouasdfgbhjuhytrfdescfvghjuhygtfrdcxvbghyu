@@ -1,6 +1,7 @@
 {% extends 'dashboard_base.html' %}
-{% block title %}Accounts - {{ HOSPITAL_NAME }}{% endblock %}
-{% block page_title %}Accounts Dashboard{% endblock %}
+{% load finance_tags %}
+{% block title %}Finance - {{ HOSPITAL_NAME }}{% endblock %}
+{% block page_title %}Finance Dashboard{% endblock %}
 {% block sidebar %}
 <nav class="nav flex-column">
     <a class="nav-link active" href="{% url 'finance:dashboard' %}"><i class="bi bi-speedometer2"></i> Dashboard</a>

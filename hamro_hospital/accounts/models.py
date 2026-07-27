@@ -16,7 +16,7 @@ class Role(models.TextChoices):
     NURSING = 'nursing', 'Nursing'
     OPERATION_THEATRE = 'operation_theatre', 'Operation Theatre'
     BLOOD_BANK = 'blood_bank', 'Blood Bank'
-    ACCOUNTS_DEPT = 'accounts_dept', 'Accounts'
+    ACCOUNTS_DEPT = 'accounts_dept', 'Finance'
     MEDICAL_RECORDS = 'medical_records', 'Medical Records'
 
 

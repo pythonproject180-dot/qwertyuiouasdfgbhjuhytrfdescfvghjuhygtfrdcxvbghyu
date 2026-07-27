@@ -1,4 +1,5 @@
 {% extends 'dashboard_base.html' %}
+{% load finance_tags %}
 {% block title %}Revenue Dashboard - {{ HOSPITAL_NAME }}{% endblock %}
 {% block page_title %}Financial Revenue Dashboard{% endblock %}
 {% block sidebar %}
@@ -60,27 +61,27 @@
 <!-- Four Primary Revenue Statistic Cards (spec section 18 - Guaranteed no-overflow responsive scaling) -->
 <div class="row g-4 mb-4">
     <div class="col-lg-3 col-sm-6">
-        <div class="stat-card blue shadow-sm d-flex flex-column justify-content-between p-3" style="min-height: 110px;">
+        <div class="stat-card blue shadow-sm d-flex flex-column justify-content-between p-3 click-amount-card" style="min-height: 110px;" onclick="showFullValue(\'Today\\\'s Revenue\', \'NPR {{ todays_revenue|floatformat:2 }}\')">
             <span class="small text-uppercase fw-bold opacity-75">Today's Revenue</span>
-            <h3 class="fw-bold m-0" style="font-size: clamp(1rem, 2vw, 1.75rem); word-wrap: break-word; overflow-wrap: break-word;">NPR {{ todays_revenue|floatformat:2 }}</h3>
+            <h3 class="fw-bold m-0" style="font-size: clamp(1rem, 2vw, 1.75rem); word-wrap: break-word; overflow-wrap: break-word;">NPR {{ todays_revenue|short_amount }}</h3>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
-        <div class="stat-card green shadow-sm d-flex flex-column justify-content-between p-3" style="min-height: 110px;">
+        <div class="stat-card green shadow-sm d-flex flex-column justify-content-between p-3 click-amount-card" style="min-height: 110px;" onclick="showFullValue(\'Monthly Revenue\', \'NPR {{ monthly_revenue|floatformat:2 }}\')">
             <span class="small text-uppercase fw-bold opacity-75">Monthly Revenue</span>
-            <h3 class="fw-bold m-0" style="font-size: clamp(1rem, 2vw, 1.75rem); word-wrap: break-word; overflow-wrap: break-word;">NPR {{ monthly_revenue|floatformat:2 }}</h3>
+            <h3 class="fw-bold m-0" style="font-size: clamp(1rem, 2vw, 1.75rem); word-wrap: break-word; overflow-wrap: break-word;">NPR {{ monthly_revenue|short_amount }}</h3>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
-        <div class="stat-card orange shadow-sm d-flex flex-column justify-content-between p-3" style="min-height: 110px;">
+        <div class="stat-card orange shadow-sm d-flex flex-column justify-content-between p-3 click-amount-card" style="min-height: 110px;" onclick="showFullValue(\'Yearly Revenue\', \'NPR {{ yearly_revenue|floatformat:2 }}\')">
             <span class="small text-uppercase fw-bold opacity-75">Yearly Revenue</span>
-            <h3 class="fw-bold m-0" style="font-size: clamp(1rem, 2vw, 1.75rem); word-wrap: break-word; overflow-wrap: break-word;">NPR {{ yearly_revenue|floatformat:2 }}</h3>
+            <h3 class="fw-bold m-0" style="font-size: clamp(1rem, 2vw, 1.75rem); word-wrap: break-word; overflow-wrap: break-word;">NPR {{ yearly_revenue|short_amount }}</h3>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
-        <div class="stat-card gray shadow-sm d-flex flex-column justify-content-between p-3" style="min-height: 110px;">
+        <div class="stat-card gray shadow-sm d-flex flex-column justify-content-between p-3 click-amount-card" style="min-height: 110px;" onclick="showFullValue(\'Total Revenue (All Time)\', \'NPR {{ total_revenue|floatformat:2 }}\')">
             <span class="small text-uppercase fw-bold opacity-75">Total Revenue (All Time)</span>
-            <h3 class="fw-bold m-0" style="font-size: clamp(1rem, 2vw, 1.75rem); word-wrap: break-word; overflow-wrap: break-word;">NPR {{ total_revenue|floatformat:2 }}</h3>
+            <h3 class="fw-bold m-0" style="font-size: clamp(1rem, 2vw, 1.75rem); word-wrap: break-word; overflow-wrap: break-word;">NPR {{ total_revenue|short_amount }}</h3>
         </div>
     </div>
 </div>

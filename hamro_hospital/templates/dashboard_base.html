@@ -35,7 +35,12 @@
                 <i class="bi bi-list"></i>
             </button>
             <div class="app-topbar-title">
-                <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+                <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle px-2 py-1" onclick="history.back()" title="Go Back">
+                        <i class="bi bi-arrow-left"></i>
+                    </button>
+                    <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+                </div>
                 <small>Welcome back, {{ request.user.get_full_name|default:request.user.username }} &middot; {{ request.user.get_role_display }}</small>
             </div>
             <div class="app-topbar-actions">
@@ -104,5 +109,28 @@
             {% block dashboard_content %}{% endblock %}
         </main>
     </div>
+
+
+    <!-- Global Amount Modal -->
+    <div class="modal fade" id="valueModal" tabindex="-1">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content text-center border-0 shadow-lg" style="border-radius: var(--radius-lg);">
+          <div class="modal-header border-0 pb-0">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body pb-4">
+            <p class="text-muted mb-1 fw-bold" id="valueModalLabel"></p>
+            <h3 class="value-modal-amount mb-0" id="valueModalAmount"></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+    function showFullValue(label, amount) {
+        document.getElementById('valueModalLabel').innerText = label;
+        document.getElementById('valueModalAmount').innerText = amount;
+        new bootstrap.Modal(document.getElementById('valueModal')).show();
+    }
+    </script>
 </div>
 {% endblock %}

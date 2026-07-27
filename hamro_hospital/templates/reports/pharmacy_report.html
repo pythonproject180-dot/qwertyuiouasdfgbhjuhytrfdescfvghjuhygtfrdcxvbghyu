@@ -1,4 +1,5 @@
 {% extends 'dashboard_base.html' %}
+{% load finance_tags %}
 {% block title %}Pharmacy Report{% endblock %}
 {% block page_title %}Pharmacy Report{% endblock %}
 {% block sidebar %}
@@ -20,8 +21,8 @@
 <div class="mb-3 text-end"><a href="{% url 'reports:pharmacy_report' %}?export=excel" class="btn btn-outline-success btn-sm"><i class="bi bi-file-earmark-excel"></i> Export Excel</a></div>
 <div class="row g-4 mb-4">
     <div class="col-md-3"><div class="stat-card blue"><h6>Total Sales</h6><h3 class="fw-bold">{{ total_sales }}</h3></div></div>
-    <div class="col-md-3"><div class="stat-card green"><h6>Total Revenue</h6><h3 class="fw-bold">NPR {{ total_revenue }}</h3></div></div>
-    <div class="col-md-3"><div class="stat-card orange"><h6>Cash</h6><h4 class="fw-bold">NPR {{ totals_by_method.cash }}</h4></div></div>
-    <div class="col-md-3"><div class="stat-card gray"><h6>Insurance</h6><h4 class="fw-bold">NPR {{ totals_by_method.insurance }}</h4></div></div>
+    <div class="col-md-3"><div class="stat-card green click-amount-card" onclick="showFullValue('Total Revenue', 'NPR {{total_revenue|floatformat:2}}')"><h6>Total Revenue</h6><h3 class="fw-bold">NPR {{total_revenue|short_amount}}</h3></div></div>
+    <div class="col-md-3"><div class="stat-card orange click-amount-card" onclick="showFullValue('Cash', 'NPR {{totals_by_method.cash|floatformat:2}}')"><h6>Cash</h6><h3 class="fw-bold">NPR {{totals_by_method.cash|short_amount}}</h3></div></div>
+    <div class="col-md-3"><div class="stat-card gray click-amount-card" onclick="showFullValue('Insurance', 'NPR {{totals_by_method.insurance|floatformat:2}}')"><h6>Insurance</h6><h3 class="fw-bold">NPR {{totals_by_method.insurance|short_amount}}</h3></div></div>
 </div>
 {% endblock %}

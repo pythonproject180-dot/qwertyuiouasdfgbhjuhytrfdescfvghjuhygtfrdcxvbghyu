@@ -13,7 +13,7 @@ from consultations.models import LabTestRequest, RequestStatus
 from reports.excel_utils import export_rows_to_excel
 
 
-@super_admin_required
+@role_required(Role.SUPER_ADMIN, Role.ACCOUNTS_DEPT)
 def revenue_dashboard(request):
     import datetime
     from django.utils import timezone
