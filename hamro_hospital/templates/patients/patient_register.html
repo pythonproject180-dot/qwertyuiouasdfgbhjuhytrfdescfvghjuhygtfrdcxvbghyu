@@ -1,0 +1,181 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}Register Patient - {{ HOSPITAL_NAME }}{% endblock %}
+{% block page_title %}Register New Patient{% endblock %}
+{% block sidebar %}
+<nav class="nav flex-column">
+    <a class="nav-link" href="{% url 'patients:dashboard' %}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+    <a class="nav-link active" href="{% url 'patients:patient_register' %}"><i class="bi bi-person-plus"></i> Register Patient</a>
+    <a class="nav-link" href="{% url 'patients:patient_search' %}"><i class="bi bi-search"></i> Search Patient</a>
+    <a class="nav-link" href="{% url 'patients:patient_list' %}"><i class="bi bi-people"></i> View Patients</a>
+</nav>
+{% endblock %}
+{% block dashboard_content %}
+<form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {% if patient_form.errors or visit_form.errors %}
+    <div class="alert alert-danger">
+        <strong>Please fix the following:</strong>
+        <ul class="mb-0">
+            {% for field in patient_form %}{% for error in field.errors %}<li>{{ field.label }}: {{ error }}</li>{% endfor %}{% endfor %}
+            {% for field in visit_form %}{% for error in field.errors %}<li>{{ field.label }}: {{ error }}</li>{% endfor %}{% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="tuh-card p-4 mb-4">
+        <h5 class="fw-bold mb-3"><i class="bi bi-person"></i> Patient Details</h5>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">First Name *</label>
+                {{ patient_form.first_name }}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Last Name *</label>
+                {{ patient_form.last_name }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Gender *</label>
+                {{ patient_form.gender }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Age *</label>
+                {{ patient_form.age_input }}
+                <small class="text-muted">{{ patient_form.age_input.help_text }}</small>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Date of Birth <small class="text-muted">(auto-calculated - edit if needed)</small></label>
+                {{ patient_form.date_of_birth }}
+                <small id="approx-dob-hint" class="text-muted"></small>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Phone Number *</label>
+                {{ patient_form.phone_number }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">District *</label>
+                {{ patient_form.district }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Municipality / Rural Municipality</label>
+                {{ patient_form.municipality }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Ward Number</label>
+                {{ patient_form.ward_number }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Tole / Street</label>
+                {{ patient_form.local_address }}
+            </div>
+        </div>
+    </div>
+
+    <div class="tuh-card p-4 mb-4">
+        <h5 class="fw-bold mb-3"><i class="bi bi-info-circle"></i> Optional Details</h5>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Citizenship Number</label>
+                {{ patient_form.citizenship_number }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Email</label>
+                {{ patient_form.email }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Blood Group</label>
+                {{ patient_form.blood_group }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Occupation</label>
+                {{ patient_form.occupation }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Guardian Name</label>
+                {{ patient_form.guardian_name }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Photo</label>
+                {{ patient_form.photo }}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Emergency Contact Name</label>
+                {{ patient_form.emergency_contact_name }}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Emergency Contact Phone</label>
+                {{ patient_form.emergency_contact_phone }}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Known Allergies</label>
+                {{ patient_form.known_allergies }}
+            </div>
+            <div class="col-12">
+                <label class="form-label">Remarks</label>
+                {{ patient_form.remarks }}
+            </div>
+        </div>
+    </div>
+
+    <div class="tuh-card p-4 mb-4">
+        <div class="form-check mb-3">
+            {{ patient_form.has_insurance }}
+            <label class="form-check-label fw-bold" for="id_has_insurance">Patient has Insurance</label>
+        </div>
+        <div id="insurance-fields" class="row g-3" style="display:none;">
+            <div class="col-md-6">
+                <label class="form-label">Insurance Company</label>
+                {{ patient_form.insurance_company }}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Policy Number</label>
+                {{ patient_form.insurance_policy_number }}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Membership Number</label>
+                {{ patient_form.insurance_membership_number }}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Card Number</label>
+                {{ patient_form.insurance_card_number }}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Expiry Date</label>
+                {{ patient_form.insurance_expiry_date }}
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Remarks</label>
+                {{ patient_form.insurance_remarks }}
+            </div>
+        </div>
+    </div>
+
+    <div class="tuh-card p-4 mb-4">
+        <h5 class="fw-bold mb-3"><i class="bi bi-clipboard2-pulse"></i> OPD Visit</h5>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Department *</label>
+                {{ visit_form.department }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Doctor (optional)</label>
+                {{ visit_form.doctor }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Patient Type *</label>
+                {{ visit_form.patient_type }}
+            </div>
+            <div class="col-12">
+                <label class="form-label">Chief Complaint</label>
+                {{ visit_form.chief_complaint }}
+            </div>
+        </div>
+        <div class="alert alert-info mt-3 mb-0" id="fee-display-wrapper">
+            Registration Fee: <strong>NPR <span id="fee-display" data-new-fee="{{ new_fee }}" data-old-fee="{{ old_fee }}">{{ new_fee }}</span></strong>
+            <small class="d-block text-muted">Automatically calculated based on patient type - no manual entry.</small>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-check-circle"></i> Register &amp; Print OPD Ticket</button>
+    <a href="{% url 'patients:dashboard' %}" class="btn btn-outline-secondary btn-lg">Cancel</a>
+</form>
+{% endblock %}

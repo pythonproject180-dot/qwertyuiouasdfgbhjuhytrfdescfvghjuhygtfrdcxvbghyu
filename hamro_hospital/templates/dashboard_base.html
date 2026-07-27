@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block navbar %}{% endblock %}
+{% block back_button %}{% endblock %}
+{% block messages %}{% endblock %}
+{% block body_attrs %} class="app-body"{% endblock %}
+{% block content %}
+<div class="app-shell">
+    <aside class="app-sidebar" id="appSidebar">
+        <div class="app-sidebar-brand">
+            <img src="{{ HOSPITAL_LOGO_URL }}" alt="{{ HOSPITAL_NAME }}">
+            <div class="brand-text">
+                <strong>{{ HOSPITAL_NAME }}</strong>
+                <span>Management System</span>
+            </div>
+            <button type="button" class="app-sidebar-toggle" aria-label="Collapse sidebar">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+        </div>
+        <div class="app-sidebar-nav">
+            {% block sidebar %}
+            <nav class="nav flex-column">
+                <a class="nav-link" href="{{ user_dashboard_url }}"><i class="bi bi-speedometer2"></i> <span>Dashboard</span></a>
+            </nav>
+            {% endblock %}
+        </div>
+        <div class="app-sidebar-foot">
+            <div class="tip-box"><i class="bi bi-heart-pulse"></i> Caring for {{ HOSPITAL_NAME }} patients, every day.</div>
+        </div>
+    </aside>
+    <div class="app-sidebar-overlay"></div>
+
+    <div class="app-main">
+        <header class="app-topbar">
+            <button type="button" class="app-icon-btn app-mobile-toggle" aria-label="Open menu">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="app-topbar-title">
+                <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+                <small>Welcome back, {{ request.user.get_full_name|default:request.user.username }} &middot; {{ request.user.get_role_display }}</small>
+            </div>
+            <div class="app-topbar-actions">
+                <a href="{% url 'website:home' %}" class="app-icon-btn d-none d-md-flex" title="View public site">
+                    <i class="bi bi-globe2"></i>
+                </a>
+                <button type="button" class="app-icon-btn theme-toggle-btn" aria-label="Toggle dark mode">
+                    <i class="bi bi-moon-stars"></i>
+                </button>
+                <div class="dropdown">
+                    <button class="app-icon-btn dropdown-toggle" type="button" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border:1px solid var(--border);">
+                        <i class="bi bi-bell"></i>
+                        {% if unread_count > 0 %}<span class="dot"></span>{% endif %}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="notifDropdown" style="width: 300px; max-height: 380px; overflow-y: auto;">
+                        <li class="dropdown-header fw-bold border-bottom pb-2">Notifications</li>
+                        {% for n in unread_notifications %}
+                            <li>
+                                <div class="dropdown-item py-2 border-bottom" style="white-space: normal;">
+                                    <div class="fw-bold small">{{ n.title }}</div>
+                                    <div class="text-muted text-wrap" style="font-size: 0.75rem;">{{ n.message }}</div>
+                                    <div class="text-muted mt-1" style="font-size: 0.65rem;">{{ n.created_at|date:"Y-m-d H:i" }}</div>
+                                </div>
+                            </li>
+                        {% empty %}
+                            <li class="text-center py-3 text-muted small">No new notifications.</li>
+                        {% endfor %}
+                        {% if unread_count > 0 %}
+                            <li class="text-center pt-2">
+                                <a href="{% url 'accounts:mark_all_read' %}" class="btn btn-sm btn-link text-primary text-decoration-none">Mark all as read</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="app-user-chip dropdown-toggle border-0" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="app-user-avatar">{{ request.user.get_full_name|default:request.user.username|slice:":1"|upper }}</span>
+                        <span class="d-none d-md-block text-start">
+                            <span class="name d-block">{{ request.user.get_full_name|default:request.user.username }}</span>
+                            <span class="role">{{ request.user.get_role_display }}</span>
+                        </span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="{{ user_dashboard_url }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form method="post" action="{% url 'accounts:logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i>Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <main class="app-content">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% block dashboard_content %}{% endblock %}
+        </main>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'patient_portal/portal_base.html' %}
+{% block title %}Book a Visit - {{ HOSPITAL_NAME }}{% endblock %}
+{% block portal_page_title %}Book a Visit{% endblock %}
+{% block portal_content %}
+<form method="post" novalidate>
+    {% csrf_token %}
+    <div class="tuh-card p-4 mb-4">
+        <h6 class="fw-bold mb-3"><i class="bi bi-clipboard2-pulse"></i> Visit Details</h6>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Department *</label>
+                {{ form.department }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Doctor (optional)</label>
+                {{ form.doctor }}
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Visit Type *</label>
+                {{ form.patient_type }}
+            </div>
+            <div class="col-12">
+                <label class="form-label">Chief Complaint</label>
+                {{ form.chief_complaint }}
+            </div>
+        </div>
+        <div class="alert alert-info mt-3 mb-0" id="fee-display-wrapper">
+            Registration Fee: <strong>NPR <span id="fee-display" data-new-fee="{{ new_fee }}" data-old-fee="{{ old_fee }}">{{ old_fee }}</span></strong>
+            <small class="d-block text-muted">
+                This creates a real OPD ticket with a token number, exactly like registering at the
+                Registration Counter - please pay the registration fee when you arrive, or at the Cash Counter.
+            </small>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-check-circle"></i> Book Visit &amp; Get Ticket</button>
+</form>
+{% endblock %}
