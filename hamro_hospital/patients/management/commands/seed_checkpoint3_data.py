@@ -121,10 +121,10 @@ class Command(BaseCommand):
                 User.objects.create(
                     username=username, first_name=first, last_name=last,
                     role=role, is_active_staff=True, is_staff=True,
-                    password=make_password('admin'),
+                    password=make_password('sashi'),
                 )
                 created_staff += 1
-        self.stdout.write(self.style.SUCCESS(f'{created_staff} new staff accounts created (password: admin).'))
+        self.stdout.write(self.style.SUCCESS(f'{created_staff} new staff accounts created (password: sashi).'))
 
         # --- Ward & beds for admissions/nursing -----------------------------
         ward_defs = [('General Ward A', Ward.WardType.GENERAL), ('ICU', Ward.WardType.ICU),
@@ -329,6 +329,6 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(f'{len(docs)} patient documents created.'))
 
         self.stdout.write(self.style.SUCCESS(
-            '\nCheckpoint 3 demo data seeding complete. New staff logins use password: admin '
+            '\nCheckpoint 3 demo data seeding complete. New staff logins use password: sashi '
             '(e.g. username "nurse1", "ot1", "bloodbank1", "accounts1", "medrecords1", "ward1").'
         ))

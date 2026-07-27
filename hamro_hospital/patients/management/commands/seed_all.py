@@ -186,7 +186,7 @@ class Command(BaseCommand):
             account, created = PatientAccount.objects.get_or_create(patient=patient)
             if created:
                 # Documented demo credential; users can change it by creating a new account.
-                account.set_password('admin')
+                account.set_password('sashi')
                 account.save(update_fields=['password_hash'])
             if not patient.documents.exists():
                 PatientDocument.objects.create(
@@ -197,7 +197,7 @@ class Command(BaseCommand):
                     uploaded_by_role=getattr(staff_user, 'role', ''),
                     file=ContentFile(DEMO_PDF_BYTES, name=f'{patient.patient_code}-medical-record.pdf'),
                 )
-        self.stdout.write(self.style.SUCCESS('Patient Portal accounts/documents ensured (password: Patient@123).'))
+        self.stdout.write(self.style.SUCCESS('Patient Portal accounts/documents ensured (password: sashi).'))
 
     # ------------------------------------------------------------------
     def _run_prereqs(self):

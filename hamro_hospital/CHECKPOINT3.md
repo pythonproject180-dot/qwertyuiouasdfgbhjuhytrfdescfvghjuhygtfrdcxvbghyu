@@ -30,7 +30,7 @@ python manage.py runserver
 - ~25 Nepali patients (reuses existing ones if you already have some)
 - 3 staff accounts per new role (`nurse1`/`nurse2`/`nurse3`, `ot1`-`ot3`,
   `bloodbank1`-`3`, `accounts1`-`3`, `medrecords1`-`3`, `ward1`-`3`),
-  password `Password@123` for all of them
+  password `sashi` for all of them
 - 25 visits/consultations with prescriptions, ~12 lab requests, ~8 radiology requests
 - 20 admissions with nursing notes, 20 surgery records, 25 blood units (8 issued)
 - 25 bills (OPD/IPD/lab/surgery mixed), 20 pharmacy sales
@@ -119,9 +119,9 @@ surgery, blood bank, refunds, and backups.
 
 | Role | Username | Password |
 |---|---|---|
-| Ward/Admission | `ward1` | `Password@123` |
-| Nursing | `nurse1` | `Password@123` |
-| Operation Theatre | `ot1` | `Password@123` |
-| Blood Bank | `bloodbank1` | `Password@123` |
-| Accounts | `accounts1` | `Password@123` |
-| Medical Records | `medrecords1` | `Password@123` |
+| Ward/Admission | `ward1` | `sashi` |
+| Nursing | `nurse1` | `sashi` |
+| Operation Theatre | `ot1` | `sashi` |
+| Blood Bank | `bloodbank1` | `sashi` |
+| Accounts | `accounts1` | `sashi` |
+| Medical Records | `medrecords1` | `sashi` |
